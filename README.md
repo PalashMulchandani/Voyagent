@@ -43,26 +43,6 @@ Both: pairing on the ML implementation itself.
 
 ---
 
-## Task Breakdown (first milestone)
-
-Goal: one real, working slice — not full breadth.
-
-### Palash
-- [ ] Set up repo structure (backend/, frontend/, notebooks/ or ml/)
-- [ ] Get one flight API working end-to-end (pick API, get a key, successful test call)
-- [ ] Get one hotel API working end-to-end
-- [ ] Basic LangGraph skeleton: a single agent that takes a trip request and calls the search APIs
-- [ ] Share progress before next call
-
-### 김희서
-- [ ] Decide: personalization-from-profile vs. route/clustering optimization for v1
-- [ ] Identify what data/features the chosen approach needs
-- [ ] Sketch what "good" looks like — how do we know the personalization is actually working?
-- [ ] Share thinking before next call
-
-### Together (next call)
-- [ ] Merge search results + ML approach into one working v1 slice
-- [ ] Agree on next milestone
 
 ## Setup
 
