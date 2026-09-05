@@ -1,0 +1,14 @@
+{
+  "dataset": "/kaggle/input/datasets/vijeetnigam26/expedia-hotel/train.csv",
+  "sample_rows": 300000,
+  "target": "booking_bool",
+  "feature_count": 47,
+  "roc_auc": 0.7631646534243497,
+  "average_precision": 0.09487395532568907,
+  "notes": [
+    "Baseline trained in Kaggle Notebook on 300,000 sampled rows.",
+    "This model ranks hotel candidates from a search result set.",
+    "It does not prove live API availability or create bookings.",
+    "Production should map live provider hotel attributes into this feature schema before scoring."
+  ]
+}

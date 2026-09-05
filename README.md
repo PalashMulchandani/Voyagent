@@ -20,7 +20,7 @@ v1 is intentionally scoped small — one trip, one city, a working end-to-end sl
 - **Agent orchestration layer** (LangGraph) — coordinates search, itinerary generation, and personalization
 - **Search agents** — query live flight/hotel APIs
 - **Itinerary agent** — assembles a day-by-day plan from search results
-- **ML personalization layer** — [approach TBD after next call: profile-based filtering vs. route/clustering optimization]
+- **ML personalization layer** — Expedia hotel candidate ranking baseline using scikit-learn gradient boosting
 - **App layer** (FastAPI + React) — where a user actually interacts with Voyagent
 
 ## Tech Stack (proposed)
@@ -29,6 +29,24 @@ v1 is intentionally scoped small — one trip, one city, a working end-to-end sl
 - ML: scikit-learn
 - Frontend: React
 - Data sources: Skyscanner or Amadeus API (flights), Booking.com Rapid API (hotels) — final choice TBD based on free-tier feasibility
+
+## Hotel Ranking ML Baseline
+
+The first ML artifact is a Kaggle Notebook baseline for hotel result ranking:
+
+- Notebook script: `notebooks/kaggle_expedia_personalized_sort_ranker.py`
+- Method: `SimpleImputer` + `HistGradientBoostingClassifier`
+- Target: `booking_bool`
+- Output: `booking_probability` for each hotel candidate
+- Initial Kaggle run: ROC AUC `0.7632`, average precision `0.0949` on 300,000 sampled rows
+
+This is a candidate-ranking model, not a booking engine. It should rerank hotels
+returned by a live supplier API after those hotels are mapped into the model's
+feature schema. Live price, availability, cancellation policy, and booking
+confirmation must still come from the supplier.
+
+See `docs/ml-hotel-ranking.md` for the feature list, evaluation notes, and live
+API integration plan.
 
 ## Team
 
