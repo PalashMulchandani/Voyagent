@@ -1,0 +1,10 @@
+{
+  "description": "Effortlessly plan personalized trips with AI-driven itineraries, live pricing, and tailored recommendations for travelers seeking unique experiences.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}

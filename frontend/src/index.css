@@ -1,0 +1,219 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,500&family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Outfit', system-ui, sans-serif;
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-mono: 'Space Mono', monospace;
+}
+
+html, body, #root {
+  height: 100%;
+  background-color: #FDF6EC;
+}
+body {
+  font-family: 'Outfit', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  color: #1e293b;
+}
+
+* { scrollbar-width: thin; scrollbar-color: transparent transparent; }
+*:hover { scrollbar-color: rgba(255,255,255,0.1) transparent; }
+
+/* ══════════════════════════════════════════════════════
+   AURORA ANIMATION
+══════════════════════════════════════════════════════ */
+@keyframes aurora1 {
+  0%, 100% { transform: translate(0%, 0%) scale(1); opacity: 0.55; }
+  50%       { transform: translate(6%, 4%) scale(1.18); opacity: 0.8; }
+}
+@keyframes aurora2 {
+  0%, 100% { transform: translate(0%, 0%) scale(1); opacity: 0.45; }
+  40%       { transform: translate(-5%, -6%) scale(1.12); opacity: 0.7; }
+  80%       { transform: translate(3%, -2%) scale(1.08); opacity: 0.5; }
+}
+@keyframes aurora3 {
+  0%, 100% { transform: translate(0%, 0%) scale(1); opacity: 0.4; }
+  33%       { transform: translate(4%, -4%) scale(1.1); opacity: 0.65; }
+  66%       { transform: translate(-4%, 5%) scale(1.14); opacity: 0.5; }
+}
+
+/* ── Scroll reveal ──────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal.delay-1 { transition-delay: 0.08s; }
+.reveal.delay-2 { transition-delay: 0.16s; }
+.reveal.delay-3 { transition-delay: 0.24s; }
+.reveal.delay-4 { transition-delay: 0.32s; }
+.reveal.delay-5 { transition-delay: 0.40s; }
+.reveal.delay-6 { transition-delay: 0.48s; }
+
+/* ── Glass ─────────────────────────────────────────── */
+.glass {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+.glass-strong {
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* ── Glows ─────────────────────────────────────────── */
+.glow-orange { box-shadow: 0 0 40px rgba(249,115,22,0.35), 0 0 80px rgba(249,115,22,0.12); }
+.glow-cyan   { box-shadow: 0 0 40px rgba(6,182,212,0.35),  0 0 80px rgba(6,182,212,0.12); }
+
+/* ── Keyframes ─────────────────────────────────────── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-10px); }
+}
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-16px); }
+}
+@keyframes pulse-ring-cyan {
+  0%   { box-shadow: 0 0 0 0   rgba(6,182,212,0.55); }
+  70%  { box-shadow: 0 0 0 14px rgba(6,182,212,0); }
+  100% { box-shadow: 0 0 0 0   rgba(6,182,212,0); }
+}
+@keyframes pulse-ring-orange {
+  0%   { box-shadow: 0 0 0 0   rgba(249,115,22,0.55); }
+  70%  { box-shadow: 0 0 0 12px rgba(249,115,22,0); }
+  100% { box-shadow: 0 0 0 0   rgba(249,115,22,0); }
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+@keyframes ticker {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes chipIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes chipOut {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(-14px); }
+}
+@keyframes notifSlide {
+  0%   { opacity: 0; transform: translateX(60px) scale(0.95); }
+  12%  { opacity: 1; transform: translateX(0)    scale(1); }
+  80%  { opacity: 1; transform: translateX(0)    scale(1); }
+  100% { opacity: 0; transform: translateX(60px) scale(0.95); }
+}
+@keyframes starTwinkle {
+  0%, 100% { opacity: 0.15; transform: scale(1); }
+  50%       { opacity: 0.9;  transform: scale(1.6); }
+}
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes borderGlow {
+  0%, 100% { border-color: rgba(6,182,212,0.3); }
+  50%       { border-color: rgba(6,182,212,0.7); }
+}
+
+/* ── Utility classes ───────────────────────────────── */
+.animate-float          { animation: float 3.5s ease-in-out infinite; }
+.animate-float-slow     { animation: float-slow 5s ease-in-out infinite; }
+.animate-pulse-cyan     { animation: pulse-ring-cyan 2.2s ease-out infinite; }
+.animate-pulse-orange   { animation: pulse-ring-orange 2s ease-out infinite; }
+.animate-blink          { animation: blink 1.1s ease-in-out infinite; }
+.animate-star           { animation: starTwinkle var(--dur, 2s) ease-in-out infinite var(--delay, 0s); }
+.animate-spin-slow      { animation: spinSlow 12s linear infinite; }
+.animate-gradient-shift { animation: gradientShift 6s ease infinite; background-size: 200% 200%; }
+.animate-border-glow    { animation: borderGlow 3s ease-in-out infinite; }
+.ticker-track           { animation: ticker 32s linear infinite; }
+.ticker-track:hover     { animation-play-state: paused; }
+
+/* ── Range inputs ──────────────────────────────────── */
+/* ── Hero cinematic ─────────────────────────────────── */
+@keyframes heroPan {
+  0%   { transform: scale(1.08) translateX(0%)  translateY(0%); }
+  33%  { transform: scale(1.12) translateX(-2%) translateY(-1%); }
+  66%  { transform: scale(1.10) translateX(-1%) translateY(-2%); }
+  100% { transform: scale(1.08) translateX(0%)  translateY(0%); }
+}
+.animate-hero-pan { animation: heroPan 20s ease-in-out infinite; }
+
+.motion-streaks {
+  background:
+    repeating-linear-gradient(172deg, transparent 0px, transparent 55px,
+      rgba(255,255,255,0.018) 55px, rgba(255,255,255,0.018) 57px),
+    repeating-linear-gradient(170deg, transparent 0px, transparent 95px,
+      rgba(255,255,255,0.010) 95px, rgba(255,255,255,0.010) 96px);
+}
+
+.scan-line {
+  position: absolute; left: 0; right: 0; height: 120px;
+  background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.025), transparent);
+  animation: scanMove 7s linear infinite;
+  pointer-events: none;
+}
+@keyframes scanMove {
+  from { transform: translateY(-100%); }
+  to   { transform: translateY(100vh); }
+}
+
+.shimmer-line {
+  background: linear-gradient(90deg, #e2d9c8 0%, #1E3A8A 40%, #F97316 60%, #e2d9c8 100%);
+  background-size: 200% auto;
+  animation: shimmer-line-anim 3s linear infinite;
+}
+@keyframes shimmer-line-anim {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+
+.animate-live-pulse { animation: livePulse 1.8s ease-in-out infinite; }
+@keyframes livePulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.6; }
+}
+
+.animate-tag-glow { animation: tagGlow 2.2s ease-in-out infinite; }
+@keyframes tagGlow {
+  0%, 100% { box-shadow: 0 0 0 0   rgba(249,115,22,0.4); }
+  50%       { box-shadow: 0 0 14px 4px rgba(249,115,22,0.25); }
+}
+
+/* ── Light glass (for bright sections) ─────────────── */
+.glass-light {
+  background: rgba(255,255,255,0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(30,58,138,0.1);
+}
+
+/* ── Range inputs ──────────────────────────────────── */
+input[type='range'] {
+  -webkit-appearance: none; appearance: none;
+  height: 4px; border-radius: 9999px; outline: none; cursor: pointer;
+}
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px; height: 18px; border-radius: 50%;
+  background: #F97316; border: 2px solid rgba(255,255,255,0.3);
+  box-shadow: 0 0 12px rgba(249,115,22,0.6); cursor: pointer;
+}
+input[type='range']::-moz-range-thumb {
+  width: 18px; height: 18px; border-radius: 50%;
+  background: #F97316; border: 2px solid rgba(255,255,255,0.3);
+}
