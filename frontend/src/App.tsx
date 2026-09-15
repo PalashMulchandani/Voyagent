@@ -187,7 +187,7 @@ function Navbar({ scrollToHero }: { scrollToHero: () => void }) {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   HERO — Swiss Alps cinematic photo, bright & vivid
+   HERO — custom road-trip video background
 ══════════════════════════════════════════════════════════════════ */
 function HeroSection({ onSubmit }: { onSubmit: (q: string) => void }) {
   const [query, setQuery]         = useState("");
@@ -195,6 +195,7 @@ function HeroSection({ onSubmit }: { onSubmit: (q: string) => void }) {
   const [chipPhase, setChipPhase] = useState<"in"|"hold"|"out">("in");
   const [isPlaying, setIsPlaying] = useState(true);
   const inputRef = useRef<HTMLInputElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     let hold: ReturnType<typeof setTimeout>;
@@ -215,6 +216,12 @@ function HeroSection({ onSubmit }: { onSubmit: (q: string) => void }) {
     return () => { clearTimeout(hold); clearTimeout(out); clearTimeout(next); };
   }, []);
 
+  useEffect(() => {
+    if (videoRef.current) {
+      isPlaying ? videoRef.current.play() : videoRef.current.pause();
+    }
+  }, [isPlaying]);
+
   const chipStyle: React.CSSProperties = {
     animation: chipPhase === "in"  ? "chipIn .38s ease-out both" :
                chipPhase === "out" ? "chipOut .38s ease-in both" : "none",
@@ -225,13 +232,17 @@ function HeroSection({ onSubmit }: { onSubmit: (q: string) => void }) {
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
 
-      {/* ── Background: Swiss Alps mountain road ── */}
+      {/* ── Background: your road-trip video ── */}
       <div className="absolute inset-0 bg-[#1a3050]">
-        <img
-          src={u(IMG.alpineRoad, 1920, 1080)}
-          alt="Winding alpine road through the Swiss Alps"
-          className={`w-full h-full object-cover ${isPlaying ? "animate-hero-pan" : ""}`}
-          style={{ transformOrigin:"center center", opacity:0.92 }}
+        <video
+          ref={videoRef}
+          autoPlay
+          loop
+          muted
+          playsInline
+          src="/hero-video.mp4"
+          className="w-full h-full object-cover"
+          style={{ opacity:0.92 }}
         />
         {/* Motion-blur cinematic streaks */}
         <div className="absolute inset-0 motion-streaks pointer-events-none" />
