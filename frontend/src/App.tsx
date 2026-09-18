@@ -1191,8 +1191,33 @@ function Footer() {
 ══════════════════════════════════════════════════════════════════ */
 export default function App() {
   const scrollToHero = () => window.scrollTo({ top:0, behavior:"smooth" });
-  const handleSubmit = useCallback((q: string) => {
-    alert(`✈️ Voyagent received: "${q}"\n\nAgents Scout, Curator & Planner are now searching live data for flights, hotels and activities.`);
+  const [tripResult, setTripResult] = useState<any>(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSubmit = useCallback(async (q: string) => {
+    setIsLoading(true);
+    try {
+      const response = await fetch("http://127.0.0.1:8000/plan-trip", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          origin: "DEL",
+          destination: q,
+          depart_date: "2026-12-01",
+          days: 3,
+          budget: "mid",
+          style: "food, walking",
+        }),
+      });
+      const data = await response.json();
+      setTripResult(data);
+      console.log("Trip result:", data);
+      alert(`Got a real response from the backend! Check the browser console (F12) to see it.`);
+    } catch (err) {
+      alert("Couldn't reach the backend — make sure uvicorn is running on port 8000.");
+    } finally {
+      setIsLoading(false);
+    }
   }, []);
 
   return (
