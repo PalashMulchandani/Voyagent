@@ -9,6 +9,14 @@ from pydantic import BaseModel
 from backend.agents.orchestrator import build_graph
 
 app = FastAPI(title="Voyagent")
+from fastapi.middleware.cors import CORSMiddleware
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # fine for local dev; restrict this before real deployment
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 graph = build_graph()
 
 
